@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
-    email = Column(String(255))
+    email = Column(String(255), nullable=False, default="", server_default="")
     username = Column(String(80), unique=True, nullable=False)
     password = Column(String(255))
     is_staff = Column(Boolean, nullable=False, default=False)
