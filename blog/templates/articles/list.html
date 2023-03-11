@@ -10,7 +10,7 @@
         <ul>
         {% for title in articles %}
             <li>
-                {{ title }}
+                <a href="{{ url_for('articles.articles_details', title=title) }}"> {{title}}</a>
             </li>
         {% endfor %}
         </ul>
