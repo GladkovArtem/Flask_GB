@@ -6,12 +6,21 @@
 
 {% block body %}
   <h1>{{ user.username }}</h1>
+  <h7>{{ user.first_name }}</h7><hr>
+  <h7>{{ user.last_name }}</h7><hr>
+  <h7>{{ user.email }}</h7><hr>
   {% if user.is_staff %}
     <span class="badge bg-secondary">staff</span>
   {% endif %}
-{% endblock %}
-
+<hr>
 <div>
   <a href="{{ url_for('users.user_list') }}">Back to users list</a>
 </div>
+<p></p>
+<div>
+  <a href="{{ url_for('authors.authors_list') }}">Back to authors list</a>
+</div>
+{% endblock %}
+
+
 
