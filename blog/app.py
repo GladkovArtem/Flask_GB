@@ -5,6 +5,7 @@ from flask import Flask, render_template
 from blog.auth.views import login_manager, auth
 import os
 from flask_migrate import Migrate
+from blog.security import flask_bcrypt
 
 
 cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
@@ -18,7 +19,8 @@ app.register_blueprint(auth, url_prefix="/auth")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////db.sqlite'
 login_manager.init_app(app)
 db.init_app(app)
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, compare_type= True)
+flask_bcrypt.init_app(app)
 
 
 @app.route('/', methods=['GET'])

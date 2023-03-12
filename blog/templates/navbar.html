@@ -6,14 +6,19 @@
             </button>
              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav  ms-auto">
+                    {% if current_user.is_authenticated %}
                     {% for (endpoint, label) in [('users.user_list', 'User'), ('articles.articles_list', 'Articles')] %}
                         <a href="{{ url_for(endpoint) }}" class="nav-link {% if request.endpoint == endpoint -%}active{%- endif %}">
                          {{ label }}
                         </a>
                     {% endfor %}
-                    {% if current_user.is_authenticated %}
                         <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                         {% else %}
+                            {% for (endpoint, label) in [('users.user_list', 'User'), ('articles.articles_list', 'Articles'),('auth.register','Register')] %}
+                            <a href="{{ url_for(endpoint) }}" class="nav-link {% if request.endpoint == endpoint -%}active{%- endif %}">
+                            {{ label }}
+                            </a>
+                            {% endfor %}
                         <a href="{{ url_for('auth.login') }}"
                         class="nav-link {% if request.endpoint == 'auth.login' -%}active{%- endif %}">
                         Login
