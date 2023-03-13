@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String, Boolean, LargeBinary, ForeignKey, Text, DateTime, func
+from sqlalchemy import Column, Integer, String, Boolean, LargeBinary, ForeignKey, Text, DateTime, func, Table
 from sqlalchemy.orm import relationship
 from blog.database import db
 from blog.security import flask_bcrypt
@@ -33,6 +33,14 @@ class User(db.Model, UserMixin):
         return f"<User #{self.id} {self.username!r}>"
 
 
+article_tag_association_table = Table(
+    "article_tag_association",
+    db.metadata,
+    Column("article_id", Integer, ForeignKey("articles.id"), nullable=False),
+    Column("tag_id", Integer, ForeignKey("tag.id"), nullable=False),
+    )
+
+
 class Articles(db.Model, UserMixin):
     __tablename__ = 'articles'
 
@@ -45,6 +53,12 @@ class Articles(db.Model, UserMixin):
     author_id = Column(Integer, ForeignKey("author.id"))
     author = relationship("Author", back_populates="article")
 
+    tags = relationship(
+        "Tag",
+        secondary=article_tag_association_table,
+        back_populates="articles",
+    )
+
 
 class Author(db.Model):
     __tablename__ = 'author'
@@ -53,3 +67,14 @@ class Author(db.Model):
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
     user = relationship("User", back_populates="author")
     article = relationship("Articles", back_populates="author")
+
+
+class Tag(db.Model):
+    id = Column(Integer, primary_key=True)
+    name = Column(String(32), nullable=False, default="", server_default="")
+
+    articles = relationship(
+        "Articles",
+        secondary=article_tag_association_table,
+        back_populates="tags",
+    )
