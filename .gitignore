@@ -1,1 +1,7 @@
 /blog/static/
+.idea
+env
+__pycache__
+.vscode
+*.pyc
+../env
