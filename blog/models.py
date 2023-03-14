@@ -59,6 +59,9 @@ class Articles(db.Model, UserMixin):
         back_populates="articles",
     )
 
+    def __str__(self):
+        return self.title
+
 
 class Author(db.Model):
     __tablename__ = 'author'
@@ -67,6 +70,9 @@ class Author(db.Model):
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
     user = relationship("User", back_populates="author")
     article = relationship("Articles", back_populates="author")
+
+    def __str__(self):
+        return self.user.username
 
 
 class Tag(db.Model):
@@ -78,3 +84,6 @@ class Tag(db.Model):
         secondary=article_tag_association_table,
         back_populates="tags",
     )
+
+    def __str__(self):
+        return self.name
