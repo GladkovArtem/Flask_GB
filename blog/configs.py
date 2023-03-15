@@ -17,3 +17,6 @@ class DevConfig(BaseConfig):
 
 class TestingConfig(BaseConfig):
     TESTING = True
+
+
+FLASK_ADMIN_SWATCH = 'sketchy' #тема для админки https://bootswatch.com/
