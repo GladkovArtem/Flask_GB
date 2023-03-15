@@ -1,4 +1,4 @@
-from blog.articles.views import articles
+from blog.articles.views import articles_app
 from blog.author.views import authors
 from blog.database import db
 from blog.user.views import users
@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config.from_object(f"blog.configs.{cfg_name}")
 app.register_blueprint(users, url_prefix="/users")
 app.register_blueprint(auth, url_prefix="/auth")
-app.register_blueprint(articles, url_prefix="/articles")
+app.register_blueprint(articles_app, url_prefix="/articles")
 app.register_blueprint(authors, url_prefix="/authors")
 # app.config['SECRET_KEY'] = '_qv3585a9i^w0dgdtcmj$osrna24$@+pzs5ga%h#efp&()mxg1'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

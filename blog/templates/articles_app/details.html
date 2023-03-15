@@ -9,7 +9,7 @@
   <div>
     <p>{{ articles.body }}</p>
     <div>Published {{ articles.dt_created }}</div>
-    <div>by {{ articles.author.user.username }}</div>
+    <div>by {{ articles.author }}</div>
     {% if articles.tags %}
       <div>Tags:</div>
       <ul>
@@ -21,7 +21,7 @@
   </div>
 <hr>
 <div>
-  <a href="{{ url_for('articles.articles_list') }}">Back to articles list</a>
+  <a href="{{ url_for('articles_app.articles_list') }}">Back to articles list</a>
 </div>
 {% endblock %}
 
