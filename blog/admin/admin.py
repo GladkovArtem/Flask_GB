@@ -61,12 +61,11 @@ class ArticlesAdminView(CustomView):
     column_filters = ("title",)
     can_export = True
     export_types = ["csv", "xlsx"]
-    create_modal = True
-
+    can_create = False
 
 # Add views
 admin.add_view(UserAdminView(User, db.session, category="Models"))
-# admin.add_view(ArticlesAdminView(Articles, db.session, category="Models"))
+admin.add_view(ArticlesAdminView(Articles, db.session, category="Models"))
 admin.add_view(TagAdminView(Tag, db.session, category="Models"))
 
 

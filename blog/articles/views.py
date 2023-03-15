@@ -8,16 +8,16 @@ from blog.models import db
 from blog.forms.article import CreateArticleForm
 
 
-articles = Blueprint("articles", __name__, url_prefix='/articles', static_folder='../static')
+articles_app = Blueprint("articles_app", __name__, url_prefix='/articles', static_folder='../static')
 
 
-@articles.route('/')
+@articles_app.route('/')
 def articles_list():
     articles = Articles.query.all()
-    return render_template("articles/list.html", articles=articles)
+    return render_template("articles_app/list.html", articles=articles)
 
 
-@articles.route("/<int:article_id>/", endpoint="details")
+@articles_app.route("/<int:article_id>/", endpoint="details")
 def article_details(article_id):
     articles = Articles.query.filter_by(id=article_id).options(
         joinedload(Articles.tags)   # для подгрузки тегов
@@ -25,10 +25,10 @@ def article_details(article_id):
     if articles is None:
         raise NotFound(f"Article #{article_id} doesn't exist!")
 
-    return render_template('articles/details.html', articles=articles)
+    return render_template('articles_app/details.html', articles=articles)
 
 
-@articles.route("/create/", methods=["GET", "POST"], endpoint="create")
+@articles_app.route("/create/", methods=["GET", "POST"], endpoint="create")
 @login_required
 def create_article():
     error = None
@@ -57,5 +57,5 @@ def create_article():
             current_app.logger.exception("Could not create a new article!")
             error = "Could not create article!"
         else:
-            return redirect(url_for("articles.details", article_id=articles.id))
-    return render_template("articles/create.html", form=form, error=error)
+            return redirect(url_for("articles_app.details", article_id=articles.id))
+    return render_template("articles_app/create.html", form=form, error=error)
