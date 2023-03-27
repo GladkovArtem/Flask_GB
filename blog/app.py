@@ -8,6 +8,8 @@ import os
 from flask_migrate import Migrate
 from blog.security import flask_bcrypt
 from blog.admin.admin import admin
+from blog.api import init_api
+
 
 cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
 app = Flask(__name__)
@@ -24,6 +26,7 @@ db.init_app(app)
 migrate = Migrate(app, db, compare_type= True)
 flask_bcrypt.init_app(app)
 admin.init_app(app)
+api = init_api(app)
 
 
 @app.route('/', methods=['GET'])
@@ -34,8 +37,7 @@ def index():
 @app.cli.command("create-tags")
 def create_tags():
     """
-    Run in your terminal:
-    ➜ flask create-tags
+    Run in your terminal:    ➜ flask create-tags
     """
     from blog.models import Tag
     for name in [
