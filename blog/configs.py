@@ -22,9 +22,11 @@ class TestingConfig(BaseConfig):
     TESTING = True
 
 
-class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
-    SECRET_KEY = os.environ.get("SECRET_KEY")
+config = {
+    'dev': DevConfig,
+    'prod': TestingConfig,
+    'ProductionConfig': DevConfig,
+}
 
 
 FLASK_ADMIN_SWATCH = 'sketchy' #тема для админки https://bootswatch.com/
