@@ -5,15 +5,16 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: .
-  environment:
-    SQLALCHEMY_DATABASE_URI: postgresql://user:password@db:5432/blog
-    CONFIG_NAME: DevConfig
-  volumes:
-    - ./blog:/app/blog
-  ports:
-    - 8080:5000
-  depends_on:
-    - db
+    environment:
+      SQLALCHEMY_DATABASE_URI: postgresql://user:password@db:5432/blog
+      CONFIG_NAME: DevConfig
+      restart: always
+    volumes:
+      - ./blog:/app/blog
+    ports:
+      - 8080:5000
+    depends_on:
+      - db
 
   db:
     image: postgres:12.7-alpine
