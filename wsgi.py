@@ -13,10 +13,10 @@ if __name__ == '__main__':
     )
 
 
-# @app.cli.command("init-db")
-# def init_db():
-#     db.create_all()
-#     print("done!")
+@app.cli.command("init-db")
+def init_db():
+    db.create_all()
+    print("done!")
 
 
 @app.cli.command("create-admin")
