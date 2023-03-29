@@ -25,7 +25,7 @@ app.register_blueprint(authors, url_prefix="/authors")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////db.sqlite'
 login_manager.init_app(app)
 db.init_app(app)
-migrate = Migrate(app, db, compare_type= True)
+migrate = Migrate(app, db, compare_type=True)
 flask_bcrypt.init_app(app)
 admin.init_app(app)
 api = init_api(app)
