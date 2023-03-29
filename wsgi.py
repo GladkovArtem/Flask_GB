@@ -28,7 +28,7 @@ def create_admin():
     """
 
     from blog.models import User
-    admin = User(username="Megaadmin", email="mail@mail.ru", is_staff=True)
+    admin = User(username="Admin", email="mail@mail.ru", is_staff=True)
     admin.password = os.environ.get("ADMIN_PASSWORD") or "adminpass"
 
     db.session.add(admin)

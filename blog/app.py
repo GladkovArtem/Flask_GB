@@ -20,9 +20,9 @@ app.register_blueprint(articles_app, url_prefix="/articles")
 app.register_blueprint(authors, url_prefix="/authors")
 # app.config['SECRET_KEY'] = '_qv3585a9i^w0dgdtcmj$osrna24$@+pzs5ga%h#efp&()mxg1'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# file_path = os.path.abspath(os.getcwd()) + "\database.db"
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + file_path
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////db.sqlite'
+file_path = os.path.abspath(os.getcwd()) + "\database.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + file_path
+# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///:memory:"
 login_manager.init_app(app)
 db.init_app(app)
 migrate = Migrate(app, db, compare_type=True)
