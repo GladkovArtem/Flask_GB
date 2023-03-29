@@ -6,7 +6,7 @@ services:
       dockerfile: ./Dockerfile
       context: .
     environment:
-      SQLALCHEMY_DATABASE_URI: postgresql://user:password@db:5432/blog
+      SQLALCHEMY_DATABASE_URI: postgres://user:ISccWttNk5oo0E3G1hcS32yVr6CBvt1X@dpg-cgi2te02qv2772h7mdjg-a/flask_v06g
       CONFIG_NAME: DevConfig
       restart: always
 #    volumes:
@@ -19,9 +19,9 @@ services:
   db:
     image: postgres:12.7-alpine
     environment:
-      POSTGRES_DB: blog
+      POSTGRES_DB: flask_v06g
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ISccWttNk5oo0E3G1hcS32yVr6CBvt1X
       PGDATA: /var/lib/postgresql/data
     volumes:
       - pgdata:/var/lib/postgresql/data
