@@ -18,11 +18,11 @@ app.register_blueprint(users, url_prefix="/users")
 app.register_blueprint(auth, url_prefix="/auth")
 app.register_blueprint(articles_app, url_prefix="/articles")
 app.register_blueprint(authors, url_prefix="/authors")
-app.config['SECRET_KEY'] = '87a1c07d55266922bd66575bb225216b'
+# app.config['SECRET_KEY'] = '87a1c07d55266922bd66575bb225216b'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # file_path = os.path.abspath(os.getcwd()) + "\database.db"
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:Sam39VhhxwgQM7I1ipOTLjroRRwvngvV@dpg-cgi514l269v5faaoh1v0-a.oregon-postgres.render.com/flask_11ds'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'SQLALCHEMY_DATABASE_URI'
+
 login_manager.init_app(app)
 db.init_app(app)
 migrate = Migrate(app, db, compare_type=True)
